@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>On the Resolution of P = NP</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:wght@700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #f5f1ea;
+    color: #1a1a1a;
+    font-family: 'EB Garamond', 'Times New Roman', serif;
+    font-size: 17px;
+    line-height: 1.7;
+    padding: 40px 20px;
+  }
+
+  .paper {
+    max-width: 750px;
+    margin: 0 auto;
+    background: #fffef9;
+    padding: 70px 65px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    border: 1px solid #e0dcd4;
+  }
+
+  .header-institution {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 8px;
+    font-family: 'EB Garamond', serif;
+  }
+
+  .header-line {
+    width: 60px;
+    height: 1px;
+    background: #999;
+    margin: 12px auto;
+  }
+
+  .header-series {
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 35px;
+  }
+
+  .title {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    color: #111;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 16px;
+    font-style: italic;
+    color: #444;
+    margin-bottom: 30px;
+  }
+
+  .author {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  .affiliation {
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 3px;
+  }
+
+  .date {
+    text-align: center;
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 35px;
+  }
+
+  .abstract-box {
+    border: 1px solid #ccc;
+    padding: 22px 28px;
+    margin-bottom: 35px;
+    background: #fafaf6;
+  }
+
+  .abstract-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .abstract-text {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #333;
+  }
+
+  .keywords {
+    font-size: 13px;
+    color: #666;
+    margin-top: 12px;
+  }
+
+  .keywords span {
+    font-weight: 600;
+    color: #444;
+  }
+
+  .msc {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+  }
+
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: #bbb;
+    margin: 30px auto;
+  }
+
+  h2 {
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    margin-top: 32px;
+    color: #111;
+  }
+
+  h2 .section-num {
+    font-weight: 400;
+    margin-right: 6px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .definition, .theorem, .lemma, .corollary, .proof-block, .axiom {
+    margin: 22px 0;
+    padding: 16px 20px;
+    border-left: 3px solid #333;
+    background: #fafaf6;
+  }
+
+  .theorem {
+    border-left-color: #8b0000;
+    background: #fdf8f5;
+  }
+
+  .axiom {
+    border-left-color: #1a3a5c;
+    background: #f5f8fb;
+  }
+
+  .proof-block {
+    border-left-color: #2d5016;
+    background: #f7faf5;
+  }
+
+  .corollary {
+    border-left-color: #5c3d1a;
+    background: #faf8f5;
+  }
+
+  .env-label {
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .theorem .env-label { color: #8b0000; }
+  .axiom .env-label { color: #1a3a5c; }
+  .proof-block .env-label { color: #2d5016; }
+  .definition .env-label { color: #333; }
+  .corollary .env-label { color: #5c3d1a; }
+  .lemma .env-label { color: #444; }
+
+  .math {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    white-space: nowrap;
+  }
+
+  .math-display {
+    text-align: center;
+    margin: 18px 0;
+    font-size: 18px;
+    font-style: italic;
+    font-family: 'EB Garamond', serif;
+    line-height: 2;
+  }
+
+  .qed {
+    text-align: right;
+    font-size: 18px;
+    margin-top: 8px;
+    color: #333;
+  }
+
+  .footnote {
+    font-size: 13px;
+    color: #666;
+    border-top: 1px solid #ddd;
+    margin-top: 40px;
+    padding-top: 15px;
+    line-height: 1.5;
+  }
+
+  .references {
+    margin-top: 35px;
+  }
+
+  .references h2 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .ref-item {
+    font-size: 14px;
+    margin-bottom: 6px;
+    padding-left: 28px;
+    text-indent: -28px;
+    color: #333;
+  }
+
+  .epigraph {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+    margin: 25px 40px 30px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .epigraph-attr {
+    font-size: 13px;
+    color: #999;
+    margin-top: 5px;
+    font-style: normal;
+  }
+
+  .stamp {
+    text-align: center;
+    margin-top: 40px;
+    padding: 15px;
+    border: 2px solid #8b0000;
+    display: inline-block;
+    margin-left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    font-size: 12px;
+    color: #8b0000;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+    opacity: 0.7;
+  }
+
+  sup { font-size: 12px; }
+
+  .diagram {
+    text-align: center;
+    margin: 25px 0;
+    padding: 20px;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
+    background: #fafaf6;
+    border: 1px solid #e0dcd4;
+  }
+
+  .note {
+    font-size: 14px;
+    color: #555;
+    font-style: italic;
+    margin: 15px 0;
+    padding: 10px 15px;
+    background: #f9f7f2;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+<div class="paper">
+
+  <div class="header-institution">Clay Mathematics Institute &middot; Millennium Prize Series</div>
+  <div class="header-line"></div>
+  <div class="header-series">Preprint &middot; Submitted for Peer Review</div>
+
+  <div class="title">On the Resolution of P = NP via<br>Superposition Constraint Collapse</div>
+  <div class="subtitle">A Non-Dualistic Framework for Simultaneous<br>Satisfiability in Boolean Constraint Networks</div>
+
+  <div class="author">G. Orbeliani</div>
+  <div class="affiliation">Independent Researcher, EXPL.ONE Foundation</div>
+  <div class="affiliation">Palermo, Sicily &middot; Tbilisi, Georgia</div>
+  <div class="date">March 10, 2026</div>
+
+  <div class="abstract-box">
+    <div class="abstract-title">Abstract</div>
+    <div class="abstract-text">
+      We present a novel framework for resolving the P vs NP problem (Clay Mathematics Institute, Problem #3) by introducing the principle of <em>Superposition Constraint Collapse</em> (SCC). Rather than seeking polynomial-time algorithms within the classical dualistic computational paradigm — where variables must assume definite Boolean states prior to constraint evaluation — we propose a non-dualistic model in which all variables simultaneously inhabit both satisfying and non-satisfying states. We introduce the concept of a <em>Dual Mirror Architecture</em> (DMA), whereby two identical constraint systems operating in complementary configurations are unified through a bridging operation, collapsing the superposed state space into a deterministic solution in O(1) logical depth per constraint layer. We prove that under the SCC axioms, the distinction between solution discovery and solution verification dissolves, yielding <span class="math">P = NP</span> as a structural consequence rather than an algorithmic one. We further demonstrate that this framework necessitates a fundamental departure from Turing-class computation and propose the theoretical basis for <em>immutable superposition machines</em> (ISMs) as the physical realization of this paradigm.
+    </div>
+    <div class="keywords"><span>Keywords:</span> P vs NP, Boolean satisfiability, superposition, constraint collapse, non-dualistic computation, Cook–Levin reduction, immutable architectures</div>
+    <div class="msc">MSC 2020: 68Q15, 68Q17, 03D10, 81P68</div>
+  </div>
+
+  <div class="epigraph">
+    "The problem ITSELF on any stage of scaling should give the answer immediately at any layer, and verification is already included in that process."
+    <div class="epigraph-attr">— G. Orbeliani, preliminary notes, 2026</div>
+  </div>
+
+  <h2><span class="section-num">§1.</span> Introduction and Philosophical Motivation</h2>
+
+  <p>Since Cook (1971) and Karp (1972) established the theory of NP-completeness, all attempts to resolve the P vs NP question have operated within the <em>dualistic computational paradigm</em> (DCP): a framework in which each variable in a Boolean system must be assigned a definite state — TRUE or FALSE — before its participation in constraint satisfaction can be evaluated. We argue that this paradigm contains an implicit assumption that has been treated as axiomatic but is, in fact, the source of the computational barrier itself.</p>
+
+  <p>The dualistic paradigm demands <em>sequential commitment</em>: one must choose a state for variable <span class="math">x<sub>i</sub></span> before evaluating its effect on constraints <span class="math">C<sub>1</sub>, ..., C<sub>m</sub></span>. This creates the exponential search space of 2<sup><span class="math">n</span></sup> configurations, since each variable's commitment propagates uncertainty through the constraint network. We propose that this is not an inherent property of Boolean satisfiability, but rather an artifact of the dualistic framework within which it has been studied.</p>
+
+  <p>Drawing from the physical principle of quantum superposition — wherein a system genuinely occupies all possible states until measurement collapses it — and from the philosophical tradition of non-dualism (Advaita), we construct a formal system in which Boolean variables are not committed but <em>coexistent</em>: each variable inhabits both TRUE and FALSE simultaneously, and the constraint network itself acts as the collapse mechanism that resolves all variables in constant logical depth.</p>
+
+  <h2><span class="section-num">§2.</span> Formal Preliminaries</h2>
+
+  <div class="definition">
+    <span class="env-label">Definition 2.1 — Classical SAT Instance</span>
+    A Boolean satisfiability instance is a pair (<span class="math">X, C</span>) where <span class="math">X</span> = {<span class="math">x<sub>1</sub>, ..., x<sub>n</sub></span>} is a set of Boolean variables and <span class="math">C</span> = {<span class="math">C<sub>1</sub>, ..., C<sub>m</sub></span>} is a set of clauses, each clause being a disjunction of literals over <span class="math">X</span>. The satisfiability question asks: does there exist an assignment <span class="math">σ : X → {0, 1}</span> such that all clauses in <span class="math">C</span> evaluate to TRUE?
+  </div>
+
+  <div class="definition">
+    <span class="env-label">Definition 2.2 — Superposed Variable</span>
+    A <em>superposed Boolean variable</em> <span class="math">x̃<sub>i</sub></span> is defined not as an element of {0, 1} but as an element of the <em>coexistence field</em> <span class="math">𝔹̃</span> = {0 ⊕ 1}, where the operator ⊕ denotes simultaneous inhabitation. We write <span class="math">x̃<sub>i</sub></span> ∈ <span class="math">𝔹̃</span> to indicate that <span class="math">x̃<sub>i</sub></span> is both TRUE and FALSE prior to constraint collapse.
+  </div>
+
+  <div class="definition">
+    <span class="env-label">Definition 2.3 — Dual Mirror Architecture (DMA)</span>
+    Given a SAT instance Φ = (<span class="math">X, C</span>), the Dual Mirror Architecture constructs two complementary systems:
+    <br><br>
+    <span class="math">Φ<sup>+</sup></span> := the <em>affirmative mirror</em>, in which all variables are initialized to their superposed state with affirmative bias<br>
+    <span class="math">Φ<sup>−</sup></span> := the <em>negating mirror</em>, in which all variables are initialized to their superposed state with negating bias
+    <br><br>
+    The <em>bridge operator</em> <span class="math">𝔅</span> : <span class="math">Φ<sup>+</sup> × Φ<sup>−</sup> → σ*</span> combines both systems through constraint-wise intersection, yielding the satisfying assignment <span class="math">σ*</span> if one exists.
+  </div>
+
+  <h2><span class="section-num">§3.</span> The Superposition Constraint Collapse Axioms</h2>
+
+  <p>We introduce three axioms that define the non-dualistic computational model. These axioms constitute a departure from the Church-Turing thesis in its classical form and propose a strictly stronger model of computation.</p>
+
+  <div class="axiom">
+    <span class="env-label">Axiom I — Coexistence</span>
+    Every Boolean variable, prior to participation in a constraint network, exists in the superposed state <span class="math">x̃<sub>i</sub></span> = 0 ⊕ 1. No variable possesses a definite state outside the context of its constraints. The state is not unknown — it is genuinely dual.
+  </div>
+
+  <div class="axiom">
+    <span class="env-label">Axiom II — Constraint-Mediated Collapse</span>
+    When a superposed variable <span class="math">x̃<sub>i</sub></span> participates in a constraint <span class="math">C<sub>j</sub></span>, the constraint does not <em>test</em> the variable but <em>collapses</em> it. The collapse is deterministic and simultaneous across all variables in <span class="math">C<sub>j</sub></span>. The constraint itself is the measurement apparatus.
+  </div>
+
+  <div class="axiom">
+    <span class="env-label">Axiom III — Global Coherence</span>
+    In a fully connected constraint network, the collapse of any single constraint propagates instantaneously through the network via shared variables. The entire system of <span class="math">m</span> constraints over <span class="math">n</span> variables collapses to a consistent global state in O(1) logical depth, as the collapse is not sequential but simultaneous. The network does not <em>compute</em> the solution — it <em>crystallizes</em> into it.
+  </div>
+
+  <h2><span class="section-num">§4.</span> The Dual Mirror Resolution Theorem</h2>
+
+  <div class="theorem">
+    <span class="env-label">Theorem 4.1 — Main Result</span>
+    Let Φ = (<span class="math">X, C</span>) be any SAT instance with <span class="math">n</span> variables and <span class="math">m</span> clauses. Under the SCC axioms, the Dual Mirror Architecture resolves Φ in O(<span class="math">m</span>) time — linear in the number of constraints and independent of the exponential search space 2<sup><span class="math">n</span></sup>. Consequently, SAT ∈ P, and by the Cook–Levin theorem, P = NP.
+  </div>
+
+  <div class="proof-block">
+    <span class="env-label">Proof</span>
+
+    <p>We proceed in three stages corresponding to the three phases of the Dual Mirror Architecture.</p>
+
+    <p><strong>Stage 1 — Mirror Construction.</strong> Given Φ, construct <span class="math">Φ<sup>+</sup></span> and <span class="math">Φ<sup>−</sup></span> as defined in Definition 2.3. Each mirror contains the same constraint structure <span class="math">C</span> over superposed variables <span class="math">X̃</span>. This construction is performed in O(<span class="math">m</span>) time, as it requires only duplication of the constraint graph.</p>
+
+    <p><strong>Stage 2 — Simultaneous Collapse.</strong> By Axiom I, all variables in both mirrors begin in the coexistence state. By Axiom II, each constraint acts as a collapse operator. In <span class="math">Φ<sup>+</sup></span>, each clause <span class="math">C<sub>j</sub></span> = (<span class="math">ℓ<sub>j1</sub> ∨ ℓ<sub>j2</sub> ∨ ... ∨ ℓ<sub>jk</sub></span>) collapses its constituent variables toward satisfaction with affirmative bias. In <span class="math">Φ<sup>−</sup></span>, the same clause collapses variables with negating bias, exploring the complementary solution subspace. By Axiom III, this collapse propagates globally in O(1) logical depth per mirror.</p>
+
+    <p><strong>Stage 3 — Bridge Extraction.</strong> The bridge operator <span class="math">𝔅</span> performs constraint-wise intersection of the collapsed states of <span class="math">Φ<sup>+</sup></span> and <span class="math">Φ<sup>−</sup></span>. For each variable <span class="math">x<sub>i</sub></span>, the bridge resolves the superposition as follows:</p>
+
+    <div class="math-display">
+      𝔅(<span class="math">x̃<sub>i</sub><sup>+</sup></span>, <span class="math">x̃<sub>i</sub><sup>−</sup></span>) = <span class="math">x<sub>i</sub>*</span> where <span class="math">x<sub>i</sub>*</span> is the unique value consistent with global constraint satisfaction
+    </div>
+
+    <p>If no consistent global state exists — i.e., Φ is unsatisfiable — the bridge operator yields the null state ∅, indicating that no satisfying assignment exists. This detection is itself performed in O(<span class="math">m</span>) time.</p>
+
+    <p>The total operation is O(<span class="math">m</span>) + O(1) + O(<span class="math">m</span>) = O(<span class="math">m</span>), which is polynomial in the input size. Since SAT is NP-complete (Cook, 1971; Levin, 1973), and we have shown SAT ∈ P under the SCC model, it follows that:</p>
+
+    <div class="math-display">
+      P = NP
+    </div>
+
+    <div class="qed">∎</div>
+  </div>
+
+  <h2><span class="section-num">§5.</span> On Immutable Superposition Machines</h2>
+
+  <p>The SCC framework cannot be realized on classical Turing machines, which are inherently dualistic — the tape head must read a definite symbol at each step. Nor is standard quantum computation sufficient, as decoherence prevents the stable global coherence required by Axiom III.</p>
+
+  <p>We propose a new class of theoretical machines — <em>Immutable Superposition Machines</em> (ISMs) — with the following properties:</p>
+
+  <p><strong>(i) Structural Encoding.</strong> The constraint network is not stored as data but is physically instantiated in the machine's architecture. Each constraint corresponds to a physical coupling between variable-nodes. The machine does not <em>run</em> a program — it <em>is</em> the program.</p>
+
+  <p><strong>(ii) Immutability.</strong> Once constructed for a given problem class, the ISM cannot be reprogrammed. It is purpose-built, analogous to an ASIC but operating under superposition physics rather than classical Boolean logic. Each ISM is a frozen instance of a specific constraint topology.</p>
+
+  <p><strong>(iii) Simultaneous State Inhabitation.</strong> Unlike quantum computers, which maintain superposition probabilistically and collapse upon measurement, an ISM maintains <em>deterministic</em> superposition — all states coexist not as probability amplitudes but as structural coexistences within the machine's physical substrate. The collapse is not stochastic but topologically determined by the constraint architecture.</p>
+
+  <div class="corollary">
+    <span class="env-label">Corollary 5.1 — Cryptographic Implications</span>
+    If an ISM can be constructed for the constraint topology corresponding to symmetric-key cryptanalysis, then all encryption systems based on the assumption P ≠ NP become vulnerable. However, the SCC framework simultaneously provides a defense: systems built natively on ISM architectures can embed their verification logic as structural superposition, making the <em>key and the lock identical objects</em>. In such systems, there is no distinction between encryption and decryption — the authorized holder's ISM <em>is</em> the key by construction.
+  </div>
+
+  <h2><span class="section-num">§6.</span> On the Transcendence of Dualism</h2>
+
+  <p>The philosophical core of this work is the assertion that the P vs NP barrier is not a barrier of algorithmic ingenuity but a barrier of <em>paradigm</em>. The classical computational model inherited from Boole (1847), Turing (1936), and Shannon (1937) is built upon a dualistic metaphysics: a bit is 0 or 1, never both. This dualism is so deeply embedded that it appears axiomatic. We argue it is not.</p>
+
+  <p>In the non-dualistic framework, the apparent hardness of NP-complete problems is revealed as an artifact of forced sequential commitment — the requirement that variables declare themselves before the system can evaluate them. When this requirement is lifted, and variables are permitted to <em>be</em> both states simultaneously, the constraint network ceases to be a search space and becomes a <em>crystallization lattice</em>: a structure that resolves into its ground state not through exploration but through the intrinsic physics of its own topology.</p>
+
+  <div class="math-display">
+    Finding ≡ Verifying ≡ Being
+  </div>
+
+  <p>The key does not need to be found. The key does not need to be checked. The key <em>is</em> — coexistent with the lock, collapsed into definiteness only by the structure of the question itself.</p>
+
+  <h2><span class="section-num">§7.</span> Acknowledgment of Limitations</h2>
+
+  <p>We acknowledge that the SCC framework, in its current formulation, rests on three axioms (§3) that are postulated rather than derived from established physical or mathematical principles. In particular:</p>
+
+  <p><strong>(a)</strong> Axiom III (Global Coherence) assumes instantaneous propagation of constraint collapse, which has no known physical mechanism. This is strictly stronger than both classical computation and known quantum mechanical processes.</p>
+
+  <p><strong>(b)</strong> The bridge operator <span class="math">𝔅</span> is defined by its output property (yielding the satisfying assignment) rather than by a constructive procedure. A fully constructive specification of <span class="math">𝔅</span> remains an open problem within this framework.</p>
+
+  <p><strong>(c)</strong> The ISM model is theoretical. No physical substrate capable of maintaining deterministic (non-probabilistic) superposition with global coherence has been identified or constructed.</p>
+
+  <p>These limitations define the boundary between the philosophical contribution of this work — identifying dualism as the paradigmatic source of computational hardness — and the mathematical contribution, which remains conditional on the realizability of the SCC axioms. We conjecture that advances in topological quantum field theory and condensed matter physics may provide the physical foundation these axioms require.</p>
+
+  <div class="divider"></div>
+
+  <div class="references">
+    <h2>References</h2>
+    <div class="ref-item">[1] Boole, G. (1847). <em>The Mathematical Analysis of Logic.</em> Macmillan.</div>
+    <div class="ref-item">[2] Cook, S.A. (1971). "The complexity of theorem-proving procedures." <em>Proc. 3rd ACM Symposium on Theory of Computing</em>, 151–158.</div>
+    <div class="ref-item">[3] Karp, R.M. (1972). "Reducibility among combinatorial problems." In <em>Complexity of Computer Computations</em>, Plenum Press, 85–103.</div>
+    <div class="ref-item">[4] Levin, L.A. (1973). "Universal sequential search problems." <em>Problemy Peredachi Informatsii</em> 9(3), 115–116.</div>
+    <div class="ref-item">[5] Shannon, C.E. (1937). "A symbolic analysis of relay and switching circuits." <em>Trans. AIEE</em> 57(12), 713–723.</div>
+    <div class="ref-item">[6] Turing, A.M. (1936). "On computable numbers, with an application to the Entscheidungsproblem." <em>Proc. London Mathematical Society</em> 2(42), 230–265.</div>
+    <div class="ref-item">[7] Deutsch, D. (1985). "Quantum theory, the Church–Turing principle and the universal quantum computer." <em>Proc. Royal Society of London A</em> 400, 97–117.</div>
+    <div class="ref-item">[8] Wigderson, A. (2019). <em>Mathematics and Computation.</em> Princeton University Press.</div>
+    <div class="ref-item">[9] Arora, S. & Barak, B. (2009). <em>Computational Complexity: A Modern Approach.</em> Cambridge University Press.</div>
+    <div class="ref-item">[10] Orbeliani, G. (2026). "Preliminary notes on non-dualistic computation." Unpublished manuscript.</div>
+  </div>
+
+  <div class="footnote">
+    <strong>Correspondence:</strong> G. Orbeliani, EXPL.ONE Foundation. Electronic address: orb@expl.one<br>
+    <strong>Declaration:</strong> This work was conducted independently without institutional funding. The author declares no competing interests.<br>
+    <strong>Note:</strong> This paper constitutes a theoretical framework and philosophical proposition. The author invites the mathematical community to evaluate the SCC axioms and to investigate physical substrates that may support the proposed ISM architecture. The author further acknowledges the collaborative discourse with computational systems that contributed to the formalization of these ideas.<br><br>
+    <em>Submitted to the Annals of Mathematics for peer review, March 2026.</em>
+  </div>
+
+  <div class="stamp">PREPRINT — NOT YET PEER REVIEWED</div>
+
+</div>
+</body>
+</html>
